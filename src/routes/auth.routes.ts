@@ -23,7 +23,7 @@ res.status(201).json({message:"user created sucessfully", user: {id: user._id, u
         res.status(500).json({message: "Internal server error"});
     }
 });
-router.post("signin", async (req: Request, res: Response)=>{
+router.post("/signin", async (req: Request, res: Response)=>{
     try{
         const {email, password}= req.body;
         const user= await UserModel.findOne({email});
