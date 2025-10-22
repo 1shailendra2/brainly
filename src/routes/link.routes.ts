@@ -26,3 +26,4 @@ router.post("/link/share", authMiddleware, async (req: AuthenticatedRequest, res
     return res.status(500).json({ error: "Internal server error" });
   }
 });
+export default router;

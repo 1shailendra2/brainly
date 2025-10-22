@@ -50,3 +50,4 @@ router.delete("/content/:id", authMiddleware, async(req: AuthenticatedRequest, r
         res.status(500).json({error: "internal server error"});
     }
 });
+export default router;
