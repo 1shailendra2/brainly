@@ -9,10 +9,22 @@ import contentRoutes from "./routes/content.routes";
 import linkRoutes from "./routes/link.routes";
 dotenv.config();
 const app= express();
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://frontendbrainly.onrender.com"
+];
+
 app.use(cors({
-      origin: "", 
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true,
-} ));
+}));
+
 app.use(express.json());
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/content", contentRoutes);
