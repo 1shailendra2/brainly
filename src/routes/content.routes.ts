@@ -2,7 +2,7 @@ import express, {Request, Response} from "express";
 import {authMiddleware, AuthenticatedRequest} from "../middleware/m.middleware";
 import { ContentModel } from "../models/Content";
 const router= express.Router();
-router.post("/content", authMiddleware , async (req: AuthenticatedRequest, res: Response) => {
+router.post("/", authMiddleware , async (req: AuthenticatedRequest, res: Response) => {
     try {
         const { title, type, link, tags } =req.body;
         const newContent= await ContentModel.create({
@@ -15,7 +15,7 @@ router.post("/content", authMiddleware , async (req: AuthenticatedRequest, res: 
     }
 });
  
-router.get("/content", authMiddleware, async(req: AuthenticatedRequest, res: Response)=>{
+router.get("/", authMiddleware, async(req: AuthenticatedRequest, res: Response)=>{
 try { const contents= await ContentModel.find({userId: req.userId});
 res.status(200).json({contents});
 }
@@ -24,7 +24,7 @@ catch (error) {
     res.status(500).json ({error: "Internal server error"});
 }
 });
-router.patch("/content/:id", authMiddleware, async(req: AuthenticatedRequest, res: Response)=> {
+router.patch("/:id", authMiddleware, async(req: AuthenticatedRequest, res: Response)=> {
     try {
         const updated= await ContentModel.findByIdAndUpdate( 
             req.params.id,
@@ -39,7 +39,7 @@ router.patch("/content/:id", authMiddleware, async(req: AuthenticatedRequest, re
         res.status(500).json({error: "Internal server error"});
     }
 });
-router.delete("/content/:id", authMiddleware, async(req: AuthenticatedRequest, res: Response)=>{
+router.delete("/:id", authMiddleware, async(req: AuthenticatedRequest, res: Response)=>{
     try{
         const deleted= await ContentModel.findByIdAndDelete(req.params.id);
         if(!deleted) return res.status(404).json({message: "content not found"});

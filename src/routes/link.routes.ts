@@ -5,7 +5,7 @@ import {LinkModel} from "../models/link";
 import { ContentModel } from "../models/Content";
 const router= express.Router();
 
-router.post("/link/share", authMiddleware, async (req: AuthenticatedRequest, res: Response) => {
+router.post("/share", authMiddleware, async (req: AuthenticatedRequest, res: Response) => {
   const { contentId, share } = req.body;
   const userId = req.userId;
 
@@ -27,7 +27,7 @@ router.post("/link/share", authMiddleware, async (req: AuthenticatedRequest, res
     return res.status(500).json({ error: "Internal server error" });
   }
 });
-router.get("/link/:hash", async (req: Request, res: Response)=>{
+router.get("/:hash", async (req: Request, res: Response)=>{
   const {hash} = req.params;
   try {
     const link= await LinkModel.findOne({hash});
