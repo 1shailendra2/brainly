@@ -11,7 +11,7 @@ dotenv.config();
 const app= express();
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://frontendbrainly.onrender.com"
+  // "https://frontendbrainly.onrender.com"
 ];
 
 app.use(cors({
