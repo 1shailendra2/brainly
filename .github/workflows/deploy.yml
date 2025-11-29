@@ -29,4 +29,4 @@ jobs:
           script: |
             cd ~/brainly
             npm install
-            pm2 restart src/index.ts
+            pm2 start src/index.ts -- name brainly
